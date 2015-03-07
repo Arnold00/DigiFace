@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/arnold/AndroidStudioProjects/WatchFace/wear/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="686344a780033e4ba22b926cd225f8d4941247e6">
+        <dex dex="/home/arnold/AndroidStudioProjects/WatchFace/wear/build/intermediates/pre-dexed/release/classes-90fecd38e68436497dabc3d0a1ce6c9951eba2d8.jar" />
+    </item>
+    <item
+        jar="/home/arnold/AndroidStudioProjects/WatchFace/wear/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="efeda77c808750cb670ee9c48d8a1835d89dbcb2">
+        <dex dex="/home/arnold/AndroidStudioProjects/WatchFace/wear/build/intermediates/pre-dexed/release/classes-79af6d00673b1f81a6d5ea3204c676b4201bc727.jar" />
+    </item>
+    <item
+        jar="/home/arnold/AndroidStudioProjects/WatchFace/wear/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/libs/internal_impl-21.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
+        <dex dex="/home/arnold/AndroidStudioProjects/WatchFace/wear/build/intermediates/pre-dexed/release/internal_impl-21.0.0-4ddc3c97fcb3b0373702b3b93f09e741e6a4c1bd.jar" />
+    </item>
+    <item
+        jar="/home/arnold/AndroidStudioProjects/WatchFace/wear/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/6.5.87/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6384c6cd674a22610b932d9464aa6938d067f285">
+        <dex dex="/home/arnold/AndroidStudioProjects/WatchFace/wear/build/intermediates/pre-dexed/release/classes-d1c8fbafa72563b41e3062a685f69dac8100be1b.jar" />
+    </item>
+    <item
+        jar="/home/arnold/AndroidStudioProjects/WatchFace/wear/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/6.5.87/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="95482e7c792a7c0d5a9d5461e97726bd54fe9549">
+        <dex dex="/home/arnold/AndroidStudioProjects/WatchFace/wear/build/intermediates/pre-dexed/release/classes-cd9341aa4003d7c9f23d070160dffa53bb9a6a71.jar" />
+    </item>
+    <item
+        jar="/home/arnold/AndroidStudioProjects/WatchFace/wear/build/intermediates/exploded-aar/com.google.android.support/wearable/1.1.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="27f19641b81b1078e653d2f0e5d1ed44d158a785">
+        <dex dex="/home/arnold/AndroidStudioProjects/WatchFace/wear/build/intermediates/pre-dexed/release/classes-0e09f2bd5b736077411592cac4fa5fe2cc72e940.jar" />
+    </item>
+    <item
+        jar="/home/arnold/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.0/support-annotations-21.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
+        <dex dex="/home/arnold/AndroidStudioProjects/WatchFace/wear/build/intermediates/pre-dexed/release/support-annotations-21.0.0-0af1edc5ca63e23fa5387bfca7912f53be967287.jar" />
+    </item>
+
+</items>
