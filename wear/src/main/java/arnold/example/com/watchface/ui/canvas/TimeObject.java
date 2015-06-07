@@ -15,15 +15,14 @@ public class TimeObject extends AbstractCanvasObject {
         super(paint, background, accent);
     }
 
-
     @Override
     public void onDraw(Canvas canvas) {
         String timeString = DigitalFaceHelper.DateTimeHelper.get24HFormat(time);
         updateText(timeString);
         int textWidth = getTextWidth();
         int textHeight = getTextHeight();
-        int x = (canvas.getWidth() / 2) - (textWidth / 2);
-        int y = (canvas.getHeight() / 2) + (textHeight / 2);
+        int x = (getCanvasWidth(canvas) / 2) - (textWidth / 2);
+        int y = (getCanvasHeight(canvas) / 2) + (textHeight / 2);
 
         canvas.drawText(timeString, x, y, paint);
     }

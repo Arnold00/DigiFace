@@ -18,7 +18,7 @@ public class MainActivity extends ActionBarActivity {
         TextView view = (TextView) findViewById(R.id.test);
 
 
-        Typeface typeface = Typeface.createFromAsset(getAssets(),"fonts/digital_7.ttf");
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/digital_7.ttf");
         view.setTypeface(typeface);
     }
 

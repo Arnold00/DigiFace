@@ -36,8 +36,9 @@ public class DateObject extends AbstractCanvasObject {
         int textWidth = getTextWidth();
         int textHeight = getTextHeight();
 
-        int x = (this.x == 0 ? canvas.getWidth() / 2 : this.x) - (textWidth / 2);
-        int y = (this.y == 0 ? canvas.getHeight() / 2 : this.y) + (textHeight / 2);
+        int x = (this.x == 0 ? getCanvasWidth(canvas) / 2 : this.x) - (textWidth / 2);
+        int y = (this.y == 0 ? getCanvasHeight(canvas) / 2 : this.y) + (textHeight / 2);
+
         canvas.drawText(dateString, x, y, paint);
     }
 }

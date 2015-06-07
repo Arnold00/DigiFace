@@ -1,25 +1,18 @@
 package arnold.example.com.watchface.application;
 
 import android.content.BroadcastReceiver;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.wearable.provider.WearableCalendarContract;
 import android.support.wearable.watchface.CanvasWatchFaceService;
 import android.support.wearable.watchface.WatchFaceStyle;
-import android.text.format.DateUtils;
 import android.text.format.Time;
 import android.view.SurfaceHolder;
 
@@ -37,6 +30,7 @@ import arnold.example.com.watchface.utils.DigitalFaceHelper;
 public class AnalogWatchFaceService extends CanvasWatchFaceService {
 
     private Engine engineInstance;
+
     public Engine getEngineInstance() {
         return engineInstance;
     }
@@ -56,6 +50,7 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
         private int accentColor;
         private int backgroundColor;
         private boolean mRegisteredTimeZoneReceiver;
+        private boolean isMoto360;
         /* a time object */
         Time mTime;
 
@@ -166,6 +161,7 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
 
     /* allocate an object to hold the time */
             mTime = new Time();
+            isMoto360 = DigitalFaceHelper.OSHelper.isMoto360();
         }
 
     /* service methods (see other sections) */
@@ -212,8 +208,7 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
         public void onPropertiesChanged(Bundle properties) {
             super.onPropertiesChanged(properties);
             mLowBitAmbient = properties.getBoolean(PROPERTY_LOW_BIT_AMBIENT, false);
-            mBurnInProtection = properties.getBoolean(PROPERTY_BURN_IN_PROTECTION,
-                    false);
+            mBurnInProtection = properties.getBoolean(PROPERTY_BURN_IN_PROTECTION, false);
         }
 
         @Override
@@ -242,8 +237,9 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
             mTime.setToNow();
             //clear
             canvas.drawColor(backgroundColor);
+            drawSecondTicker(canvas);
             int centerX = canvas.getWidth() / 2;
-            int centerY = canvas.getHeight() / 2;
+            int centerY = getCanvasHeight(canvas) / 2;
             timeObject.updateTime(mTime);
             timeObject.onDraw(canvas);
 
@@ -262,12 +258,21 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
             //drawTime(canvas);
             //drawDate(canvas);
 
+
+        }
+
+        private int getCanvasHeight(Canvas canvas){
+            return  isMoto360 ? canvas.getHeight() + 30 : canvas.getHeight();
         }
 
         private void drawSecondTicker(Canvas canvas) {
             float centerX = canvas.getWidth() / 2f;
-            float centerY = canvas.getHeight() / 2f;
-
+            float centerY;
+            if (isMoto360) {
+                centerY = (canvas.getHeight() + 30) / 2f;
+            } else {
+                centerY = canvas.getHeight() / 2f;
+            }
 //            // Compute rotations and lengths for the clock hands.
             float secRot = mTime.second / 30f * (float) Math.PI;
             float secLength = centerX * (float) Math.sqrt(2d);
@@ -280,19 +285,6 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
             canvas.drawCircle(centerX, centerY, centerX - (centerX / 5), circlePaint);
         }
 
-        public class CalendarAsyncTask extends AsyncTask<Void, Void, Void> {
-            @Override
-            protected Void doInBackground(Void... params) {
-                long begin = System.currentTimeMillis();
-                Uri.Builder builder =
-                        WearableCalendarContract.Instances.CONTENT_URI.buildUpon();
-                ContentUris.appendId(builder, begin);
-                ContentUris.appendId(builder, begin + DateUtils.DAY_IN_MILLIS);
-                final Cursor cursor = getContentResolver().query(builder.build(),
-                        null, null, null, null);
-                return null;
-            }
-        }
     }
 
 

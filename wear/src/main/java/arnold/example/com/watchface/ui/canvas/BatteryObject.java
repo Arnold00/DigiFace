@@ -35,6 +35,7 @@ public class BatteryObject extends AbstractCanvasObject {
         this.percentage = DigitalFaceHelper.Battery.getBatteryPercentage(context);
         System.out.println("TEST updated battery");
     }
+
     @Override
     public void onDraw(Canvas canvas) {
         String batteryString = "Bat. " + percentage + "%";
@@ -45,8 +46,9 @@ public class BatteryObject extends AbstractCanvasObject {
         int textWidth = getTextWidth();
         int textHeight = getTextHeight();
 
-        int x = (this.x == 0 ? canvas.getWidth() / 2 : this.x) - (textWidth / 2);
-        int y = (this.y == 0 ? canvas.getHeight() / 2 : this.y) + (textHeight / 2);
+        int x = (this.x == 0 ? getCanvasWidth(canvas) / 2 : this.x) - (textWidth / 2);
+        int y = (this.y == 0 ? getCanvasHeight(canvas) / 2 : this.y) + (textHeight / 2);
+
         canvas.drawText(batteryString, x, y, paint);
         if (time.minute!= lastUpdatedMinute) {
             updatePercentage();
