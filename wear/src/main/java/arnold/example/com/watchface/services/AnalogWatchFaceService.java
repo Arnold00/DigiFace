@@ -125,7 +125,7 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
 
             //second pointer
             secondPaint = new Paint();
-            secondPaint.setStrokeWidth(5.0f);
+            secondPaint.setStrokeWidth(3.0f);
             secondPaint.setAntiAlias(true);
             secondPaint.setStrokeCap(Paint.Cap.ROUND);
 
