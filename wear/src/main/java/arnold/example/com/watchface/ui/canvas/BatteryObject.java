@@ -2,9 +2,12 @@ package arnold.example.com.watchface.ui.canvas;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
+import arnold.example.com.watchface.application.DigiFaceApplication;
 import arnold.example.com.watchface.ui.AbstractCanvasObject;
+import arnold.example.com.watchface.utils.DigiFaceSettings;
 import arnold.example.com.watchface.utils.DigitalFaceHelper;
 
 /**

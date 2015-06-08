@@ -1,11 +1,10 @@
-package arnold.example.com.watchface.application;
+package arnold.example.com.watchface.services;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -22,6 +21,7 @@ import arnold.example.com.watchface.managers.FontManager;
 import arnold.example.com.watchface.ui.canvas.BatteryObject;
 import arnold.example.com.watchface.ui.canvas.DateObject;
 import arnold.example.com.watchface.ui.canvas.TimeObject;
+import arnold.example.com.watchface.utils.DigiFaceSettings;
 import arnold.example.com.watchface.utils.DigitalFaceHelper;
 
 /**
@@ -59,9 +59,12 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
         boolean mLowBitAmbient;
 
         Paint secondPaint;
+        Paint digitalPaint;
         TimeObject timeObject;
         DateObject dateObject;
         BatteryObject batteryObject;
+        Paint datePaint;
+        Paint batteryPaint;
         Paint circlePaint;
         //...
 
@@ -116,20 +119,18 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
                     .setShowSystemUiTime(false)
                     .build());
 
-            accentColor = Color.RED;
-            backgroundColor = Color.BLACK;
+            accentColor = DigiFaceSettings.Color.getAccentColor();
+            backgroundColor = DigiFaceSettings.Color.getBackgroundColor();
     /* create graphic styles */
 
             //second pointer
             secondPaint = new Paint();
-            secondPaint.setColor(accentColor);
             secondPaint.setStrokeWidth(5.0f);
             secondPaint.setAntiAlias(true);
             secondPaint.setStrokeCap(Paint.Cap.ROUND);
 
             //digital clock
-            Paint digitalPaint = new Paint();
-            digitalPaint.setColor(accentColor);
+            digitalPaint = new Paint();
             digitalPaint.setStrokeWidth(20);
             digitalPaint.setTypeface(FontManager.getInstance().getFontTypeface(FontManager.getInstance().getCurrentFont(), AnalogWatchFaceService.this));
             digitalPaint.setTextSize(100);
@@ -137,28 +138,25 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
 
             // littlecircle
             circlePaint = new Paint();
-            circlePaint.setColor(backgroundColor);
             circlePaint.setStrokeWidth(5.0f);
             circlePaint.setAntiAlias(true);
             circlePaint.setStrokeCap(Paint.Cap.ROUND);
 
             //digital date
-            Paint datePaint = new Paint();
-            datePaint.setColor(accentColor);
+            datePaint = new Paint();
             datePaint.setStrokeWidth(20);
             datePaint.setTypeface(FontManager.getInstance().getFontTypeface(FontManager.getInstance().getCurrentFont(), AnalogWatchFaceService.this));
             datePaint.setTextSize(50);
             dateObject = new DateObject(datePaint, backgroundColor, accentColor);
 
             //digital date
-            Paint batteryPaint = new Paint();
-            batteryPaint.setColor(accentColor);
+            batteryPaint = new Paint();
             batteryPaint.setStrokeWidth(20);
             batteryPaint.setTypeface(FontManager.getInstance().getFontTypeface(FontManager.getInstance().getCurrentFont(), AnalogWatchFaceService.this));
             batteryPaint.setTextSize(50);
             batteryObject = new BatteryObject(getApplicationContext(), batteryPaint, backgroundColor, accentColor);
 
-
+            updateColors();
     /* allocate an object to hold the time */
             mTime = new Time();
             isMoto360 = DigitalFaceHelper.OSHelper.isMoto360();
@@ -257,12 +255,14 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
 
             //drawTime(canvas);
             //drawDate(canvas);
-
+            if (isColorUpdateNeeded()) {
+                updateColors();
+            }
 
         }
 
-        private int getCanvasHeight(Canvas canvas){
-            return  isMoto360 ? canvas.getHeight() + 30 : canvas.getHeight();
+        private int getCanvasHeight(Canvas canvas) {
+            return isMoto360 ? canvas.getHeight() + 30 : canvas.getHeight();
         }
 
         private void drawSecondTicker(Canvas canvas) {
@@ -283,6 +283,20 @@ public class AnalogWatchFaceService extends CanvasWatchFaceService {
                     secondPaint);
 
             canvas.drawCircle(centerX, centerY, centerX - (centerX / 5), circlePaint);
+        }
+
+        private void updateColors() {
+            backgroundColor = DigiFaceSettings.Color.getBackgroundColor();
+            accentColor = DigiFaceSettings.Color.getAccentColor();
+            secondPaint.setColor(accentColor);
+            digitalPaint.setColor(accentColor);
+            circlePaint.setColor(backgroundColor);
+            datePaint.setColor(accentColor);
+            batteryPaint.setColor(accentColor);
+        }
+
+        private boolean isColorUpdateNeeded() {
+            return (backgroundColor != DigiFaceSettings.Color.getBackgroundColor()) || (accentColor != DigiFaceSettings.Color.getAccentColor());
         }
 
     }
